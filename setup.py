@@ -6,7 +6,8 @@ with open('requirements.txt') as f:
 
 setup(
     name="T0",
-    version="3.1.5.11",
+    use_scm_version=True,
+    setup_requires=['setuptools_scm'],
     description="This package contains the code that is involved in the Tier 0 agent when its deployed",
     author="Dirk Hufnagel",
     author_email="Dirk.Hufnagel@cern.ch",
