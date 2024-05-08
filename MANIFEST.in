@@ -1,4 +1,4 @@
-include bin/tier0-mod-config
-include etc/Tier0Config.py
+recursive-include etc *
+recursive-include bin *
 include requirements.txt
 include LICENSE
