@@ -16,7 +16,10 @@ setup(
     license="MIT",
     packages=find_packages(where="src/python"),
     package_dir={"": "src/python"},
-    package_data={"": ["etc/*", "bin/*"]},
+    include_package_data=True,
+    package_data={
+        '': ['etc/*', 'bin/*'],
+    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
