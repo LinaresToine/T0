@@ -1,4 +1,4 @@
-recursive-include etc *
-recursive-include bin *
+graft bin
+graft etc
 include requirements.txt
 include LICENSE
