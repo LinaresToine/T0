@@ -54,6 +54,6 @@ setup(name='t0',
                              ]),
       data_files=list_static_files(),
       install_requires=parse_requirements(requirements),
-      url="https://github.com/LinaresToine/T0",
+      url="https://github.com/dmwm/T0",
       license="Apache License, Version 2.0",
       )
