@@ -11,7 +11,6 @@ from distutils.core import Command, setup
 from os.path import join as pjoin
 
 from setup_build import BuildCommand, InstallCommand, get_path_to_t0_root, list_packages, list_static_files
-from setup_test import CoverageCommand, TestCommand
 
 
 class CleanCommand(Command):
