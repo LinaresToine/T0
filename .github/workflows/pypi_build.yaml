@@ -10,10 +10,8 @@
 # set of actions. We also define here necessary secrets used by given template.
 
 on:
-  # this section fires workflow on a specific tag which matches some pattern
-  push:
-    tags:
-      - '*.*.*'
+  release:
+    types: [published]
   # this section forces manual builds
   workflow_dispatch:
     inputs:
