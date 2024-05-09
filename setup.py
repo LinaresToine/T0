@@ -123,5 +123,4 @@ setup(name='T0',
       data_files=list_static_files(),
       url="https://github.com/dmwm/T0",
       license="Apache License, Version 2.0"
-
       )
