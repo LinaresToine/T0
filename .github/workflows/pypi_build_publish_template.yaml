@@ -29,6 +29,12 @@ jobs:
         run: |
           cp requirements.txt requirements.t0.txt
           awk "/(${{ inputs.t0_component }}$)|(${{ inputs.t0_component }},)/ {print \$1}" requirements.t0.txt > requirements.txt
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade build
+          pip install setuptools wheel twine
+
       - name: Build sdist
         run: python setup.py clean sdist
         
