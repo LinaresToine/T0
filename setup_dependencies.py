@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 dependencies = {
-    't0': {
+    'T0': {
         'packages': ['T0+', 'T0Component+']
     }
 }
