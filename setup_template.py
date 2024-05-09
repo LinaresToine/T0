@@ -60,6 +60,6 @@ setup(name=package_name,
       cmdclass={
           'clean': CleanCommand,
       },
-      url="https://github.com/LinaresToine/T0",
+      url="https://github.com/dmwm/T0",
       license="Apache License, Version 2.0",
       )
