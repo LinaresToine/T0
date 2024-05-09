@@ -7,7 +7,9 @@ on:
         required: true
         type: string
     secrets:
-      pypy_token:
+      TWINE_USERNAME:
+        required: true
+      TWINE_PASSWORD:
         required: true
 
 jobs:
