@@ -29,4 +29,5 @@ jobs:
     with:
       t0_component: ${{ matrix.target }}
     secrets:
-      pypy_token: ${{ secrets.PYPI_TOKEN }}
+      TWINE_USERNAME: __token__
+      TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
