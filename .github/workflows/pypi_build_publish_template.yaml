@@ -1,16 +1,8 @@
 # Reusable workflow to setup a specific T0 component for pip
 
 on:
-  workflow_call:
-    inputs:
-      t0_component:
-        required: true
-        type: string
-    secrets:
-      TWINE_USERNAME:
-        required: true
-      TWINE_PASSWORD:
-        required: true
+  release:
+    types: [published]
 
 jobs:
   build_and_publish_from_template:
