@@ -15,10 +15,10 @@ from setuptools import setup, Command
 from setup_build import list_static_files, things_to_build
 from setup_dependencies import dependencies
 
-# get the WMCore version (thanks rucio devs)
+# get the t0 version (thanks rucio devs)
 sys.path.insert(0, os.path.abspath('src/python'))
-from WMCore import __version__
-wmcore_version = __version__
+from T0 import __version__
+t0_version = __version__
 
 # the contents of package_name are modified via tools/build_pypi_packages.sh
 package_name = "PACKAGE_TO_BUILD"
@@ -49,7 +49,7 @@ def parse_requirements(requirements_file):
         sys.exit(1)
 
 setup(name=package_name,
-      version=wmcore_version,
+      version=t0_version,
       package_dir={'': 'src/python/'},
       packages=packages,
       py_modules=py_modules,
