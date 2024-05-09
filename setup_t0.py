@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # This setup script is used to build the T0 pypi package.
-# The version number comes from WMCore/__init__.py and needs to
+# The version number comes from T0/__init__.py and needs to
 # follow PEP 440 conventions
 
 from __future__ import print_function, division
@@ -13,7 +13,7 @@ from setup_build import list_packages, list_static_files, get_path_to_t0_root
 
 # Obnoxiously, there's a dependency cycle when building packages. We'd like
 # to simply get the current T0 version by using
-# from WMCore import __version__
+# from T0 import __version__
 # But PYTHONPATH isn't set until after the package is built, so we can't
 # depend on the python module resolution behavior to load the version.
 # Instead, we use the imp module to load the source file directly by
