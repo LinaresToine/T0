@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Build, clean and test the WMCore package.
+Build, clean and test the t0 package.
 """
 from __future__ import print_function
 
@@ -55,7 +55,7 @@ class EnvCommand(Command):
         if not os.getenv('COUCHURL', False):
             # Use the default localhost URL if none is configured.
             print('export COUCHURL=http://localhost:5984')
-        here = get_path_to_wmcore_root()
+        here = get_path_to_t0_root()
 
         tests = here + '/test/python'
         source = here + '/src/python'
@@ -78,8 +78,8 @@ class EnvCommand(Command):
         print('export PYTHONPATH=%s' % ':'.join(pypath))
         print('export PATH=%s' % ':'.join(expath))
 
-        # We want the WMCORE root set, too
-        print('export T0_ROOT=%s' % get_path_to_wmcore_root())
+        # We want the t0 root set, too
+        print('export T0_ROOT=%s' % get_path_to_t0_root())
         print('export T0BASE=$T0_ROOT')
 
 # The actual setup command, and the classes associated to the various options
@@ -90,17 +90,17 @@ DEFAULT_PACKAGES = list_packages(['src/python/T0',
                                   'src/python/T0Component'
                                  ])
 
-# Divine out the version of WMCore from WMCore.__init__, which is bumped by
+# Divine out the version of t0 from t0.__init__, which is bumped by
 # "bin/buildrelease.sh"
 
 # Obnoxiously, there's a dependency cycle when building packages. We'd like
-# to simply get the current WMCore version by using
-# from WMCore import __version__
+# to simply get the current t0 version by using
+# from t0 import __version__
 # But PYTHONPATH isn't set until after the package is built, so we can't
 # depend on the python module resolution behavior to load the version.
 # Instead, we use the imp module to load the source file directly by
 # filename.
-t0_root = get_path_to_wmcore_root()
+t0_root = get_path_to_t0_root()
 t0_package = imp.load_source('temp_module', os.path.join(t0_root,
                                                             'src',
                                                             'python',
@@ -119,7 +119,7 @@ setup(name='T0',
                 'build_system': BuildCommand,
                 'install_system': InstallCommand},
       # base directory for all our packages
-      package_dir={'': 'src/python/'},  # % get_path_to_wmcore_root()},
+      package_dir={'': 'src/python/'},  # % get_path_to_t0_root()},
       packages=DEFAULT_PACKAGES,
       data_files=list_static_files(),
       url="https://github.com/LinaresToine/T0",
