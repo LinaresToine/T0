@@ -121,8 +121,8 @@ setup(name='T0',
       package_dir={'': 'src/python/'},  # % get_path_to_t0_root()},
       packages=DEFAULT_PACKAGES,
       data_files=list_static_files(),
-      url="https://github.com/LinaresToine/T0",
+      url="https://github.com/dmwm/T0",
       license="Apache License, Version 2.0",
-      download_url = "https://github.com/LinaresToine/T0/tarball/%s" % t0_version
+      download_url = "https://github.com/dmwm/T0/tarball/%s" % t0_version
 
       )
