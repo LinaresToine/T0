@@ -6,6 +6,7 @@ dependencies = {
                      'T0Component+'],
         'modules': [],
         'systems': [],
-        'statics': []
+        'statics': ['bin+',
+                    'etc+']
     }
 }
