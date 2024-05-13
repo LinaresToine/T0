@@ -3,7 +3,7 @@
 dependencies = {
     't0': {
         'packages': ['T0+', 
-                     'T0Component+']
+                     'T0Component+'],
         'modules': [],
         'systems': [],
         'statics': []
