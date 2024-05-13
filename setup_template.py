@@ -21,7 +21,7 @@ from T0 import __version__
 t0_version = __version__
 
 # the contents of package_name are modified via tools/build_pypi_packages.sh
-package_name = "T0"
+package_name = "t0"
 packages, py_modules = things_to_build(package_name, pypi=True)
 data_files = list_static_files(dependencies[package_name])
 
