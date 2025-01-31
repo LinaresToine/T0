@@ -996,6 +996,12 @@ def addRepackConfig(config, streamName, **options):
         streamConfig.Repack.DataTier = options.get("dataTier", streamConfig.Repack.DataTier)
     else:
         streamConfig.Repack.DataTier = options.get("dataTier", "RAW")
+
+    if hasattr(streamConfig.Repack, "ReservedRaw"):
+        streamConfig.Repack.ReservedRaw = options.get("reservedRaw", streamConfig.Repack.ReservedRaw)
+    else:
+        streamConfig.Repack.ReservedRaw = options.get("reservedRaw", False)
+
     return
 
 def addExpressConfig(config, streamName, **options):
