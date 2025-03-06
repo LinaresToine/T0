@@ -378,7 +378,7 @@ def deleteSiteConfig(config, siteName):
 
     return
 
-def retrieveDatasetConfig(config, datasetName, fromAddDataset = False):
+def retrieveDatasetConfig(config, datasetName, defaultDataset = "Default", fromAddDataset = False):
     """
     _retrieveDatasetConfig_
     
@@ -388,9 +388,14 @@ def retrieveDatasetConfig(config, datasetName, fromAddDataset = False):
     datasetConfig = getattr(config.Datasets, datasetName, None)
 
     if datasetConfig == None:
-        defaultInstance = getattr(config.Datasets, "Default", None)
-        if defaultInstance == None:
+        defaultInstance = getattr(config.Datasets, defaultDataset, None)
+        if defaultInstance == None and defaultDataset == "Default":
             datasetConfig = config.Datasets.section_(datasetName)
+        elif defaultInstance == None:
+            # This must be a raw skim dataset
+            # can't define raw skim dataset if parent dataset is not defined    
+            msg = "Tier0Config.addDataset : parent dataset %s not defined for raw skim dataset %s" % (parentDataset, datasetName)
+            raise RuntimeError(msg)
         else:
             datasetConfig = copy.deepcopy(defaultInstance)
             datasetConfig._internal_name = datasetName
@@ -404,7 +409,7 @@ def retrieveDatasetConfig(config, datasetName, fromAddDataset = False):
     return datasetConfig
 
 
-def addDataset(config, datasetName, **settings):
+def addDataset(config, datasetName, defaultDataset="Default", **settings):
     """
     _addDataset_
 
@@ -444,7 +449,7 @@ def addDataset(config, datasetName, **settings):
                                (defaults to False)
       blockCloseDelay - block closing timeout in hours
     """
-    datasetConfig = retrieveDatasetConfig(config, datasetName, True)
+    datasetConfig = retrieveDatasetConfig(config=config, datasetName=datasetName, defaultDataset=defaultDataset, fromAddDataset=True)
 
     #
     # first the mandatory paramters
@@ -605,6 +610,7 @@ def addDataset(config, datasetName, **settings):
     datasetConfig.AlcaSkims = settings.get("alca_producers", [])
     datasetConfig.PhysicsSkims = settings.get("physics_skims", [])
     datasetConfig.DqmSequences = settings.get("dqm_sequences", [])
+    datasetConfig.RawSkims = settings.get("raw_skims", [])
 
     if hasattr(datasetConfig, "MaxMemoryperCore"):
         datasetConfig.MaxMemoryperCore = settings.get("maxMemoryperCore", datasetConfig.MaxMemoryperCore)
@@ -921,6 +927,12 @@ def addRepackConfig(config, streamName, **options):
     """
     streamConfig = retrieveStreamConfig(config, streamName)
     streamConfig.ProcessingStyle = "Bulk"
+
+    global_tag = options.get("global_tag", None)
+    if not global_tag:
+        msg = "Tier0Config.addExpressConfig : global_tag not defined for stream %s" % streamName
+        raise RuntimeError(msg)
+    streamConfig.Repack.GlobalTag = global_tag
 
     if hasattr(streamConfig, "VersionOverride"):
         streamConfig.VersionOverride = options.get("versionOverride", streamConfig.VersionOverride)

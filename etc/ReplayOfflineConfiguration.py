@@ -157,6 +157,7 @@ alcarawProcVersion = dt
 
 expressGlobalTag = "141X_dataRun3_Express_v4"
 promptrecoGlobalTag = "141X_dataRun3_Prompt_v4"
+repackGlobalTag = "141X_dataRun3_Prompt_v4"
 
 
 # Mandatory for CondDBv2
@@ -192,6 +193,7 @@ setExtraStreamDatasetMap(tier0Config,{
 #set default repack settings for bulk streams
 addRepackConfig(tier0Config, "Default",
                 proc_ver=defaultProcVersion,
+                global_tag=repackGlobalTag,
                 maxSizeSingleLumi=24 * 1024 * 1024 * 1024,
                 maxSizeMultiLumi=8 * 1024 * 1024 * 1024,
                 minInputSize=2.1 * 1024 * 1024 * 1024,
@@ -568,7 +570,22 @@ for dataset in DATASETS:
                do_reco=True,
                scenario=ppScenario)
 
-DATASETS = ["ParkingDoubleMuonLowMass0","ParkingDoubleMuonLowMass1","ParkingDoubleMuonLowMass2",
+DATASETS = ["ParkingDoubleMuonLowMass0"]
+RawSkims = {"ReserveDMu0": {"write_dqm" : False}, "ReserveDMu1": {}}
+for dataset in DATASETS:
+    addDataset(tier0Config, dataset,
+               do_reco=True,
+               write_dqm=True,
+               dqm_sequences=["@common", "@muon", "@heavyFlavor"],
+               alca_producers=["TkAlJpsiMuMu", "TkAlUpsilonMuMu"],
+               tape_node=None,
+               raw_skims=list(RawSkims),
+               scenario=ppScenario)
+
+    for rawSkim in list(RawSkims):
+        addDataset(tier0Config, dataset, **RawSkims[rawSkim])
+
+DATASETS = ["ParkingDoubleMuonLowMass1","ParkingDoubleMuonLowMass2",
             "ParkingDoubleMuonLowMass3"]
 
 for dataset in DATASETS:
